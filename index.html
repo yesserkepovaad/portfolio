@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Your Name] — History Researcher & Analyst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --navy:        #1B2B4B;
+            --accent:      #2563EB;
+            --accent-light:#EFF6FF;
+            --gold-bg:     #FEF9EC;
+            --gold-border: #E9C95A;
+            --gold-text:   #7A5C00;
+            --gold-muted:  #8A6C1A;
+            --text:        #1A1A2E;
+            --text-muted:  #6B7280;
+            --bg:          #FFFFFF;
+            --bg-alt:      #F9FAFB;
+            --border:      #E5E7EB;
+            --radius:      8px;
+            --max-w:       900px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+        }
+
+        /* ── Navigation ─────────────────────────────────────────── */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 0 24px;
+        }
+
+        .nav-inner {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--navy);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--accent); }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--navy);
+            border-radius: 2px;
+            transition: all 0.25s;
+        }
+
+        .nav-mobile {
+            display: none;
+            flex-direction: column;
+            background: white;
+            border-top: 1px solid var(--border);
+            padding: 8px 24px 16px;
+        }
+
+        .nav-mobile.open { display: flex; }
+
+        .nav-mobile a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-mobile a:last-child { border-bottom: none; }
+
+        /* ── Shared section styles ───────────────────────────────── */
+        section { padding: 80px 24px; }
+        section:nth-child(even) { background: var(--bg-alt); }
+
+        .container {
+            max-width: var(--max-w);
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 40px;
+            line-height: 1.2;
+        }
+
+        /* ── Section 1: Hero ─────────────────────────────────────── */
+        #intro {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(140deg, #EFF6FF 0%, #FFFFFF 55%);
+            padding: 100px 24px 80px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 56px;
+            align-items: center;
+        }
+
+        .hero-text .greeting {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            color: var(--navy);
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+
+        .hero-text .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: 24px;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-text .bio {
+            font-size: 1rem;
+            color: var(--text);
+            max-width: 500px;
+            line-height: 1.75;
+            margin-bottom: 36px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            padding: 11px 24px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: background 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover { background: #1D4ED8; transform: translateY(-1px); }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--navy);
+            padding: 11px 24px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border: 1.5px solid var(--border);
+            transition: border-color 0.2s, color 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .hero-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #DBEAFE, #EFF6FF);
+            border: 4px solid white;
+            box-shadow: 0 8px 32px rgba(37,99,235,0.14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* ── Section 2: Interests ────────────────────────────────── */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .interest-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 22px;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .interest-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            transform: translateY(-2px);
+        }
+
+        .interest-icon { font-size: 1.5rem; margin-bottom: 12px; }
+
+        .interest-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.975rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .interest-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .minor-banner {
+            background: var(--gold-bg);
+            border: 1px solid var(--gold-border);
+            border-radius: var(--radius);
+            padding: 22px 26px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .minor-icon { font-size: 1.75rem; flex-shrink: 0; margin-top: 2px; }
+
+        .minor-banner h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold-text);
+            margin-bottom: 6px;
+        }
+
+        .minor-banner p {
+            font-size: 0.865rem;
+            color: var(--gold-muted);
+            line-height: 1.65;
+        }
+
+        /* ── Section 3: Skills ───────────────────────────────────── */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+        }
+
+        .skills-column h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .skill-tag {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-size: 0.82rem;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: default;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent-light);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ── Section 4: Publications ─────────────────────────────── */
+        .publications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 32px;
+        }
+
+        .pub-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 22px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 24px;
+            transition: box-shadow 0.2s;
+        }
+
+        .pub-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+
+        .pub-info { flex: 1; min-width: 0; }
+
+        .pub-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .pub-tag {
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pub-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .pub-meta {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .pub-meta strong { color: var(--text); }
+
+        .pub-description {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .pub-action {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .pub-year {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: white;
+            background: var(--navy);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .btn-download {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            color: var(--accent);
+            border: 1.5px solid var(--accent);
+            padding: 8px 14px;
+            border-radius: var(--radius);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-download:hover { background: var(--accent); color: white; }
+
+        .cv-row { text-align: center; }
+
+        /* ── Section 5: Contact ──────────────────────────────────── */
+        .contact-inner {
+            max-width: 540px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-inner > p {
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 15px 20px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: border-color 0.2s, background 0.2s, color 0.2s;
+        }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .contact-icon { font-size: 1.15rem; flex-shrink: 0; }
+
+        .contact-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+            font-weight: 400;
+            margin-bottom: 2px;
+        }
+
+        .contact-link:hover .contact-label { color: inherit; opacity: 0.7; }
+
+        .contact-value {
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        /* ── Footer ──────────────────────────────────────────────── */
+        footer {
+            background: var(--navy);
+            color: rgba(255,255,255,0.45);
+            text-align: center;
+            padding: 22px 24px;
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+        }
+
+        footer a:hover { color: white; }
+
+        /* ── Fade-in animation ───────────────────────────────────── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Responsive ──────────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .nav-links  { display: none; }
+            .hamburger  { display: flex; }
+
+            section { padding: 60px 20px; }
+
+            #intro { padding: 80px 20px 60px; min-height: auto; }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            /* photo comes first on mobile via order */
+            .hero-photo { order: -1; margin: 0 auto; width: 140px; height: 140px; font-size: 2.4rem; }
+
+            .hero-text .bio { max-width: 100%; }
+            .hero-buttons  { justify-content: center; }
+
+            .interests-grid { grid-template-columns: 1fr; }
+
+            .skills-grid { grid-template-columns: 1fr; gap: 28px; }
+
+            .pub-card { flex-direction: column; gap: 16px; }
+            .pub-action { flex-direction: row; align-items: center; width: 100%; justify-content: space-between; }
+
+            h2 { font-size: 1.65rem; margin-bottom: 28px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 { font-size: 1.9rem; }
+            .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+            .hero-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Navigation ──────────────────────────────────────────────── -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="#intro" class="nav-logo">[Your Name]</a>
+        <ul class="nav-links">
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#interests">Interests</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <div class="nav-mobile" id="nav-mobile">
+        <a href="#intro">Introduction</a>
+        <a href="#interests">Interests</a>
+        <a href="#skills">Skills</a>
+        <a href="#publications">Publications</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<!-- ── Section 1: Introduction ─────────────────────────────────── -->
+<section id="intro">
+    <div class="container">
+        <div class="hero-grid">
+            <div class="hero-text fade-in">
+                <p class="greeting">Welcome</p>
+                <h1>[Your Full Name]</h1>
+                <p class="subtitle">History Graduate Student &nbsp;·&nbsp; Researcher &nbsp;·&nbsp; Analyst</p>
+                <p class="bio">
+                    [2–3 sentences about yourself. Example: I am a graduate student specializing
+                    in [your field], with a strong foundation in archival research, critical
+                    analysis, and cross-cultural communication. I bring the rigor of historical
+                    methodology to complex, real-world problems.]
+                </p>
+                <div class="hero-buttons">
+                    <a href="#publications" class="btn-primary">View My Work</a>
+                    <a href="#contact" class="btn-secondary">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-photo fade-in" style="transition-delay:0.15s">
+                <!-- Replace emoji with your photo:
+                     <img src="assets/photo.jpg" alt="[Your Name]"> -->
+                🎓
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Section 2: Academic Interests ───────────────────────────── -->
+<section id="interests">
+    <div class="container">
+        <p class="section-label fade-in">Research Focus</p>
+        <h2 class="fade-in">Academic Interests</h2>
+
+        <div class="interests-grid">
+            <div class="interest-card fade-in">
+                <div class="interest-icon">📜</div>
+                <h3>[Interest Area 1]</h3>
+                <p>[Brief description. E.g., Modern European history — analytical framework for understanding political and institutional change.]</p>
+            </div>
+            <div class="interest-card fade-in" style="transition-delay:0.08s">
+                <div class="interest-icon">🗺️</div>
+                <h3>[Interest Area 2]</h3>
+                <p>[Brief description. E.g., Colonial and post-colonial studies — cross-cultural competency and understanding of global power structures.]</p>
+            </div>
+            <div class="interest-card fade-in" style="transition-delay:0.16s">
+                <div class="interest-icon">💻</div>
+                <h3>[Interest Area 3]</h3>
+                <p>[Brief description. E.g., Digital humanities — applying computational methods to historical datasets and archival materials.]</p>
+            </div>
+            <div class="interest-card fade-in" style="transition-delay:0.24s">
+                <div class="interest-icon">🏛️</div>
+                <h3>[Interest Area 4]</h3>
+                <p>[Optional fourth area of interest and its professional relevance.]</p>
+            </div>
+            <div class="interest-card fade-in" style="transition-delay:0.32s">
+                <div class="interest-icon">📊</div>
+                <h3>[Interest Area 5]</h3>
+                <p>[Optional fifth area of interest and its professional relevance.]</p>
+            </div>
+        </div>
+
+        <!-- Minor in Spanish & Hispanic Studies -->
+        <div class="minor-banner fade-in">
+            <div class="minor-icon">🇪🇸</div>
+            <div>
+                <h3>Minor in Spanish &amp; Hispanic Studies</h3>
+                <p>
+                    Formal academic training in Spanish language, Latin American and Iberian
+                    history, and Hispanic cultural analysis. Enables direct engagement with
+                    Spanish-language primary sources, archival materials, and regional
+                    scholarship — a professional asset for organizations operating in or
+                    researching Spanish-speaking markets and contexts.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Section 3: Skills ────────────────────────────────────────── -->
+<section id="skills">
+    <div class="container">
+        <p class="section-label fade-in">What I Bring</p>
+        <h2 class="fade-in">Skills</h2>
+        <div class="skills-grid">
+            <div class="skills-column fade-in">
+                <h3>Hard Skills</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Archival Research</span>
+                    <span class="skill-tag">Academic Writing</span>
+                    <span class="skill-tag">Qualitative Analysis</span>
+                    <span class="skill-tag">Literature Review</span>
+                    <span class="skill-tag">Primary Source Analysis</span>
+                    <span class="skill-tag">Citation Management (Zotero)</span>
+                    <span class="skill-tag">Spanish — Professional</span>
+                    <span class="skill-tag">Long-form Reporting</span>
+                    <span class="skill-tag">Research Methodology</span>
+                    <!-- Add or remove skill tags as needed -->
+                </div>
+            </div>
+            <div class="skills-column fade-in" style="transition-delay:0.15s">
+                <h3>Soft Skills</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Critical Thinking</span>
+                    <span class="skill-tag">Attention to Detail</span>
+                    <span class="skill-tag">Written Communication</span>
+                    <span class="skill-tag">Complex Problem Analysis</span>
+                    <span class="skill-tag">Cross-cultural Awareness</span>
+                    <span class="skill-tag">Project Management</span>
+                    <span class="skill-tag">Working Under Ambiguity</span>
+                    <span class="skill-tag">Time Management</span>
+                    <span class="skill-tag">Independent Research</span>
+                    <!-- Add or remove skill tags as needed -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Section 4: Publications ──────────────────────────────────── -->
+<section id="publications">
+    <div class="container">
+        <p class="section-label fade-in">Research Output</p>
+        <h2 class="fade-in">Selected Publications</h2>
+
+        <div class="publications-list">
+
+            <!-- Publication 1 — replace all bracketed values -->
+            <div class="pub-card fade-in">
+                <div class="pub-info">
+                    <div class="pub-tags">
+                        <span class="pub-tag">Peer-reviewed</span>
+                        <span class="pub-tag">[Topic tag]</span>
+                    </div>
+                    <h3>[Full Title of Paper]</h3>
+                    <p class="pub-meta"><strong>[Journal / Conference / University Press]</strong></p>
+                    <p class="pub-description">[One sentence describing the argument or contribution of this paper.]</p>
+                </div>
+                <div class="pub-action">
+                    <span class="pub-year">2024</span>
+                    <a href="assets/papers/[filename].pdf" download class="btn-download">&#x2193; Download PDF</a>
+                </div>
+            </div>
+
+            <!-- Publication 2 -->
+            <div class="pub-card fade-in" style="transition-delay:0.08s">
+                <div class="pub-info">
+                    <div class="pub-tags">
+                        <span class="pub-tag">Peer-reviewed</span>
+                        <span class="pub-tag">[Topic tag]</span>
+                    </div>
+                    <h3>[Full Title of Paper]</h3>
+                    <p class="pub-meta"><strong>[Journal / Conference / University Press]</strong></p>
+                    <p class="pub-description">[One sentence describing the argument or contribution of this paper.]</p>
+                </div>
+                <div class="pub-action">
+                    <span class="pub-year">2023</span>
+                    <a href="assets/papers/[filename].pdf" download class="btn-download">&#x2193; Download PDF</a>
+                </div>
+            </div>
+
+            <!-- Publication 3 -->
+            <div class="pub-card fade-in" style="transition-delay:0.16s">
+                <div class="pub-info">
+                    <div class="pub-tags">
+                        <span class="pub-tag">[Tag]</span>
+                    </div>
+                    <h3>[Full Title of Paper]</h3>
+                    <p class="pub-meta"><strong>[Journal / Conference / University Press]</strong></p>
+                    <p class="pub-description">[One sentence describing the argument or contribution of this paper.]</p>
+                </div>
+                <div class="pub-action">
+                    <span class="pub-year">2022</span>
+                    <a href="assets/papers/[filename].pdf" download class="btn-download">&#x2193; Download PDF</a>
+                </div>
+            </div>
+
+            <!-- Copy and paste the block above to add more publications -->
+
+        </div>
+
+        <div class="cv-row fade-in">
+            <a href="assets/cv.pdf" download class="btn-primary">&#x2193; &nbsp;Download Full CV</a>
+        </div>
+    </div>
+</section>
+
+<!-- ── Section 5: Contact ────────────────────────────────────────── -->
+<section id="contact">
+    <div class="container">
+        <div class="contact-inner">
+            <p class="section-label fade-in">Get in Touch</p>
+            <h2 class="fade-in">Contact</h2>
+            <p class="fade-in">
+                Open to research positions, consulting roles, and graduate program inquiries.
+                Feel free to reach out through any of the channels below.
+            </p>
+
+            <div class="contact-links">
+                <a href="mailto:[your.email@example.com]" class="contact-link fade-in">
+                    <span class="contact-icon">✉️</span>
+                    <span>
+                        <span class="contact-label">Email</span>
+                        <span class="contact-value">[your.email@example.com]</span>
+                    </span>
+                </a>
+                <a href="https://linkedin.com/in/[your-handle]" target="_blank" rel="noopener" class="contact-link fade-in" style="transition-delay:0.08s">
+                    <span class="contact-icon">💼</span>
+                    <span>
+                        <span class="contact-label">LinkedIn</span>
+                        <span class="contact-value">linkedin.com/in/[your-handle]</span>
+                    </span>
+                </a>
+                <a href="https://www.researchgate.net/profile/[your-profile]" target="_blank" rel="noopener" class="contact-link fade-in" style="transition-delay:0.16s">
+                    <span class="contact-icon">🔬</span>
+                    <span>
+                        <span class="contact-label">ResearchGate</span>
+                        <span class="contact-value">researchgate.net/profile/[your-profile]</span>
+                    </span>
+                </a>
+                <!-- Optional: uncomment to add ORCID
+                <a href="https://orcid.org/[your-id]" target="_blank" rel="noopener" class="contact-link fade-in">
+                    <span class="contact-icon">🆔</span>
+                    <span>
+                        <span class="contact-label">ORCID</span>
+                        <span class="contact-value">[0000-0000-0000-0000]</span>
+                    </span>
+                </a>
+                -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 [Your Name] &nbsp;·&nbsp; <a href="mailto:[your.email@example.com]">[your.email@example.com]</a></p>
+</footer>
+
+<script>
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMobile = document.getElementById('nav-mobile');
+    hamburger.addEventListener('click', () => navMobile.classList.toggle('open'));
+    navMobile.querySelectorAll('a').forEach(link =>
+        link.addEventListener('click', () => navMobile.classList.remove('open'))
+    );
+
+    // Active nav highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a, .nav-mobile a');
+    const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link =>
+                    link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id)
+                );
+            }
+        });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => sectionObserver.observe(s));
+
+    // Scroll fade-in
+    const fadeObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                fadeObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+</script>
+
+</body>
+</html>

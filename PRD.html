@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRD — History Graduate Student Portfolio Website</title>
+    <style>
+        /* Screen styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 13.5px;
+            line-height: 1.65;
+            color: #1a1a2e;
+            background: #fff;
+            padding: 48px;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        /* Cover block */
+        .cover {
+            border-left: 5px solid #2563EB;
+            padding: 28px 32px;
+            margin-bottom: 48px;
+            background: #F0F6FF;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .cover .doc-type {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #2563EB;
+            margin-bottom: 6px;
+        }
+
+        .cover h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1B2B4B;
+            margin-bottom: 10px;
+        }
+
+        .cover .meta {
+            font-size: 12px;
+            color: #6B7280;
+        }
+
+        /* Headings */
+        h2 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1B2B4B;
+            margin-top: 36px;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #2563EB;
+        }
+
+        h3 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1B2B4B;
+            margin-top: 22px;
+            margin-bottom: 8px;
+        }
+
+        h4 {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #374151;
+            margin-top: 14px;
+            margin-bottom: 6px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #E5E7EB;
+            margin: 28px 0;
+        }
+
+        p { margin-bottom: 10px; }
+
+        /* Lists */
+        ul, ol {
+            margin: 8px 0 12px 20px;
+        }
+
+        li { margin-bottom: 4px; }
+
+        /* Nested list */
+        li > ul { margin-top: 4px; margin-bottom: 4px; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0 18px;
+            font-size: 12.5px;
+        }
+
+        th {
+            background: #1B2B4B;
+            color: white;
+            font-weight: 600;
+            padding: 9px 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #E5E7EB;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) td { background: #F9FAFB; }
+
+        /* Inline code */
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            background: #F3F4F6;
+            border: 1px solid #E5E7EB;
+            border-radius: 3px;
+            padding: 1px 5px;
+        }
+
+        /* Bold / italic */
+        strong { font-weight: 700; color: #111827; }
+        em { font-style: italic; }
+
+        /* Checkbox list */
+        .checklist { list-style: none; margin-left: 0; }
+        .checklist li { padding-left: 22px; position: relative; margin-bottom: 5px; }
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            color: #9CA3AF;
+            font-size: 13px;
+        }
+
+        /* Section label strip */
+        .section-strip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .section-num {
+            background: #2563EB;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+
+        /* Color swatches */
+        .swatch-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+        .swatch {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11.5px;
+            color: #374151;
+        }
+        .swatch-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            border: 1px solid rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+
+        /* Print-only page breaks */
+        .page-break { page-break-before: always; }
+
+        /* ── Print styles ────────────────────────────── */
+        @media print {
+            body {
+                padding: 0;
+                font-size: 11.5px;
+            }
+
+            .cover { background: #F0F6FF !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            th { background: #1B2B4B !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            tr:nth-child(even) td { background: #F9FAFB !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .swatch-dot { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+            h2, h3 { page-break-after: avoid; }
+            table { page-break-inside: avoid; }
+            .pub-block { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Cover -->
+<div class="cover">
+    <p class="doc-type">Product Requirements Document</p>
+    <h1>History Graduate Student Portfolio Website</h1>
+    <p class="meta">Version 1.0 &nbsp;·&nbsp; Date: May 2026 &nbsp;·&nbsp; Status: Draft</p>
+</div>
+
+<!-- Overview -->
+<h2>Overview</h2>
+<p>A single-page personal portfolio website for a history graduate student, designed to attract employers and corporate companies by presenting academic expertise as transferable professional value.</p>
+
+<hr>
+
+<!-- Goals -->
+<h2>Goals</h2>
+<ul>
+    <li>Present the owner as a credible, hire-ready professional with a history background</li>
+    <li>Communicate the bridge between academic skills and corporate utility</li>
+    <li>Provide a fast, frictionless way for employers to assess fit and make contact</li>
+    <li>Work on all devices (desktop, tablet, mobile)</li>
+</ul>
+
+<hr>
+
+<!-- Target Audience -->
+<h2>Target Audience</h2>
+<table>
+    <tr>
+        <th>Audience</th>
+        <th>What They Need to See</th>
+    </tr>
+    <tr><td>Corporate HR / Recruiters</td><td>Clear skills, clean layout, contact CTA</td></tr>
+    <tr><td>Research &amp; Consulting firms</td><td>Publications, analytical expertise</td></tr>
+    <tr><td>Think tanks / NGOs</td><td>Academic interests, rigor, writing ability</td></tr>
+    <tr><td>University Master's program recruiters</td><td>Academic interests, writing samples, research focus, GPA/credentials</td></tr>
+    <tr><td>University PhD program recruiters</td><td>Publications, research agenda, theoretical depth, supervisor fit signals</td></tr>
+</table>
+
+<hr>
+
+<!-- Realization Approach -->
+<h2>Realization Approach</h2>
+<p><strong>Recommended stack:</strong> Pure HTML5 + CSS3 + vanilla JavaScript</p>
+<p><strong>Why:</strong></p>
+<ul>
+    <li>No build toolchain or framework dependency</li>
+    <li>Loads instantly — one <code>.html</code> file with embedded CSS and JS</li>
+    <li>Easy to host for free (GitHub Pages, Netlify, Vercel)</li>
+    <li>Easy to maintain without a developer</li>
+</ul>
+<p><strong>Alternative:</strong> If you want a CMS or easy future editing — use Notion + Super.so, or a Hugo/Jekyll static site generator.</p>
+
+<hr>
+
+<!-- Pages & Sections -->
+<h2>Pages &amp; Sections</h2>
+<p>The site is a single scrollable page with a fixed navigation bar linking to each section via anchor links.</p>
+
+<hr>
+
+<!-- Section 1 -->
+<h3><span class="section-num">Section 1</span> &nbsp;Greeting &amp; Brief Introduction</h3>
+<p><strong>Purpose:</strong> First impression. Establish identity and purpose within 5 seconds.</p>
+<p><strong>Content:</strong></p>
+<ul>
+    <li>Full name (large heading)</li>
+    <li>Title: e.g. <em>"History Graduate Student | Researcher | Analyst"</em></li>
+    <li>2–3 sentence personal statement positioning history skills as professional assets</li>
+    <li>Two CTA buttons: <strong>"View My Work"</strong> (scrolls to Publications) and <strong>"Contact Me"</strong> (scrolls to Contacts)</li>
+    <li>Optional: professional headshot photo</li>
+</ul>
+<p><strong>Design notes:</strong></p>
+<ul>
+    <li>Full-viewport-height hero block</li>
+    <li>High contrast, professional color palette (navy, white, gold accent)</li>
+    <li>Subtle fade-in animation on load to add polish</li>
+</ul>
+
+<!-- Section 2 -->
+<h3><span class="section-num">Section 2</span> &nbsp;Academic Interests</h3>
+<p><strong>Purpose:</strong> Show depth of expertise and intellectual focus areas.</p>
+<p><strong>Content:</strong></p>
+<ul>
+    <li>Section heading: <em>"Academic Interests"</em> or <em>"Research Focus"</em></li>
+    <li>3–5 areas of historical specialization (e.g. Modern European History, Colonial Studies, Digital Humanities)</li>
+    <li>Each interest as a card or tile with:
+        <ul>
+            <li>Icon or small illustration</li>
+            <li>Title of the interest</li>
+            <li>1–2 sentence description of why it matters professionally</li>
+        </ul>
+    </li>
+    <li>Dedicated subsection or highlighted badge: <strong>Minor in Spanish &amp; Hispanic Studies</strong>
+        <ul>
+            <li>Brief note on what the minor covers (language proficiency, Latin American / Iberian history and culture, literary and cultural analysis)</li>
+            <li>Framed as a professional asset: cross-cultural competency, Spanish-language source access, regional expertise</li>
+        </ul>
+    </li>
+</ul>
+<p><strong>Design notes:</strong></p>
+<ul>
+    <li>Card grid layout (3 columns on desktop, 1 on mobile)</li>
+    <li>Minor displayed as a distinct visual element (highlighted gold banner) so it stands out from the main interest cards</li>
+    <li>Connects abstract academic work to practical relevance (e.g. "archival research → due diligence; Hispanic Studies minor → Spanish-language markets")</li>
+</ul>
+
+<!-- Section 3 -->
+<h3><span class="section-num">Section 3</span> &nbsp;Skills</h3>
+<p><strong>Purpose:</strong> Convince corporate employers that a historian has concrete, usable skills.</p>
+<p><strong>Hard Skills</strong> (technical, discipline-specific):</p>
+<ul>
+    <li>Archival &amp; primary source research</li>
+    <li>Academic writing &amp; long-form reporting</li>
+    <li>Qualitative data analysis</li>
+    <li>Literature review &amp; synthesis</li>
+    <li>Citation management (Zotero, EndNote)</li>
+    <li>Foreign language proficiency (list languages + level)</li>
+    <li>Digital humanities tools (if applicable)</li>
+</ul>
+<p><strong>Soft Skills</strong> (transferable):</p>
+<ul>
+    <li>Critical thinking &amp; complex problem analysis</li>
+    <li>Attention to detail</li>
+    <li>Written and verbal communication</li>
+    <li>Project management (dissertation / thesis experience)</li>
+    <li>Working with ambiguity and incomplete information</li>
+    <li>Cross-cultural awareness</li>
+</ul>
+<p><strong>Design notes:</strong></p>
+<ul>
+    <li>Split into two visually distinct columns: Hard / Soft</li>
+    <li>Use tag badges or progress-style indicators (avoid generic percentage bars)</li>
+    <li>Each skill optionally expands or has a tooltip with a brief example</li>
+</ul>
+
+<!-- Section 4 -->
+<h3><span class="section-num">Section 4</span> &nbsp;Publications</h3>
+<p><strong>Purpose:</strong> Provide concrete evidence of intellectual output and writing quality, with direct access to the full papers.</p>
+<p><strong>Content:</strong></p>
+<ul>
+    <li>Section heading: <em>"Selected Publications"</em> or <em>"Research Output"</em></li>
+    <li>List of 3–8 publications, each showing:
+        <ul>
+            <li>Title</li>
+            <li>Publication venue (journal name, conference, university press)</li>
+            <li>Year</li>
+            <li>One-line description of the contribution or argument</li>
+            <li><strong>"Download PDF"</strong> button linking directly to the paper's PDF file</li>
+        </ul>
+    </li>
+    <li>Optional: tag chips per entry (e.g. <code>Modern History</code>, <code>Archival Research</code>, <code>Peer-reviewed</code>)</li>
+</ul>
+<p><strong>PDF handling:</strong></p>
+<ul>
+    <li>Each paper stored as a local file inside <code>assets/papers/</code></li>
+    <li>Download link uses the HTML <code>download</code> attribute — triggers file save, not browser tab</li>
+    <li>File naming convention: <code>lastname-short-title-year.pdf</code></li>
+    <li>No external hosting dependency — all files live in the same repository as the site</li>
+</ul>
+<p><strong>Design notes:</strong></p>
+<ul>
+    <li>Vertical list / card layout</li>
+    <li>Clear visual hierarchy: title bold, venue muted, year as a badge</li>
+    <li>Download button styled as a distinct secondary action (outlined button with ↓ icon)</li>
+    <li>"Download CV" button at the bottom of this section</li>
+</ul>
+
+<!-- Section 5 -->
+<h3><span class="section-num">Section 5</span> &nbsp;Contacts</h3>
+<p><strong>Purpose:</strong> Remove all friction for an interested employer to reach out.</p>
+<p><strong>Content:</strong></p>
+<ul>
+    <li>Email address (with mailto link)</li>
+    <li>LinkedIn profile link</li>
+    <li>ResearchGate or Academia.edu profile (optional)</li>
+    <li>ORCID (optional — signals academic credibility)</li>
+    <li>Short message: <em>"Open to research, consulting, and analytical roles. Feel free to reach out."</em></li>
+</ul>
+<p><strong>Design notes:</strong></p>
+<ul>
+    <li>Centered layout, minimal</li>
+    <li>Icon-prefixed link rows (not just plain text links)</li>
+    <li>Footer below with copyright line</li>
+</ul>
+
+<hr>
+
+<!-- Navigation -->
+<h2>Navigation</h2>
+<ul>
+    <li>Sticky top navigation bar: Introduction · Interests · Skills · Publications · Contact</li>
+    <li>Smooth scroll behavior between sections</li>
+    <li>Active section highlighted in the nav as the user scrolls</li>
+    <li>Hamburger menu on mobile</li>
+</ul>
+
+<hr>
+
+<!-- Non-Functional Requirements -->
+<h2>Non-Functional Requirements</h2>
+<table>
+    <tr>
+        <th>Requirement</th>
+        <th>Target</th>
+    </tr>
+    <tr><td>Page load time</td><td>&lt; 2 seconds</td></tr>
+    <tr><td>Mobile responsiveness</td><td>Works on all screen sizes ≥ 320px</td></tr>
+    <tr><td>Accessibility</td><td>WCAG 2.1 AA (alt text, contrast ratios, keyboard nav)</td></tr>
+    <tr><td>Browser support</td><td>Chrome, Firefox, Safari, Edge (last 2 versions)</td></tr>
+    <tr><td>Hosting</td><td>Static hosting (GitHub Pages / Netlify) — free tier</td></tr>
+    <tr><td>Maintainability</td><td>All content editable in plain HTML without a developer</td></tr>
+</table>
+
+<hr>
+
+<!-- Design Style -->
+<h2>Design Style</h2>
+<p><strong>Three-word direction: Corporate · Friendly · Minimalistic</strong></p>
+<table>
+    <tr>
+        <th>Principle</th>
+        <th>Implementation</th>
+    </tr>
+    <tr><td>Corporate</td><td>Navy primary color, structured grid layout, clean typography, no decorative clutter</td></tr>
+    <tr><td>Friendly</td><td>Warm white backgrounds, soft card shadows, rounded corners, approachable serif headings</td></tr>
+    <tr><td>Minimalistic</td><td>Generous whitespace, max-width container (900px), muted secondary text, no unnecessary elements</td></tr>
+</table>
+
+<h4>Color Palette</h4>
+<div class="swatch-row">
+    <span class="swatch"><span class="swatch-dot" style="background:#1B2B4B"></span> #1B2B4B — Deep Navy (headings, nav)</span>
+    <span class="swatch"><span class="swatch-dot" style="background:#2563EB"></span> #2563EB — Accent Blue (CTA, links)</span>
+    <span class="swatch"><span class="swatch-dot" style="background:#EFF6FF"></span> #EFF6FF — Accent Light (tags, hover)</span>
+    <span class="swatch"><span class="swatch-dot" style="background:#FEF9EC"></span> #FEF9EC — Gold bg (minor banner)</span>
+    <span class="swatch"><span class="swatch-dot" style="background:#F9FAFB"></span> #F9FAFB — Alt bg (sections)</span>
+    <span class="swatch"><span class="swatch-dot" style="background:#6B7280"></span> #6B7280 — Muted text</span>
+</div>
+
+<h4>Typography</h4>
+<ul>
+    <li><strong>Headings:</strong> Playfair Display (serif — scholarly, authoritative)</li>
+    <li><strong>Body:</strong> Inter (sans-serif — clean, modern, corporate)</li>
+</ul>
+
+<p><strong>Deliverable format:</strong> Single <code>index.html</code> file with all CSS and JS embedded — no external dependencies except Google Fonts CDN. Fully responsive down to 320px.</p>
+
+<hr>
+
+<!-- Design Principles -->
+<h2>Design Principles</h2>
+<ol>
+    <li><strong>Professional over flashy</strong> — targets corporate employers and academic committees, not creative agencies</li>
+    <li><strong>Content-first</strong> — skills and publications are the product; design serves them</li>
+    <li><strong>Credibility signals</strong> — publications, institutions, language skills build trust</li>
+    <li><strong>Clear value translation</strong> — every academic strength should have a corporate framing</li>
+    <li><strong>Single file</strong> — all CSS and JS embedded in <code>index.html</code>; PDFs stored in <code>assets/papers/</code></li>
+</ol>
+
+<hr>
+
+<!-- Deliverables -->
+<h2>Deliverables</h2>
+<ul class="checklist">
+    <li><code>index.html</code> — full single-page site (CSS &amp; JS embedded)</li>
+    <li><code>assets/</code> — headshot photo, favicon, CV PDF</li>
+    <li><code>assets/papers/</code> — PDF files for each listed publication</li>
+</ul>
+
+<hr>
+
+<!-- Out of Scope -->
+<h2>Out of Scope</h2>
+<ul>
+    <li>CMS or database backend</li>
+    <li>Blog or multi-page expansion</li>
+    <li>Payment or e-commerce</li>
+    <li>User accounts or authentication</li>
+</ul>
+
+<hr>
+
+<!-- Success Metrics -->
+<h2>Success Metrics</h2>
+<ul>
+    <li>Page renders correctly on desktop and mobile</li>
+    <li>All 5 sections are present and populated with real content</li>
+    <li>CV download works</li>
+    <li>Contact method (email or form) is functional</li>
+    <li>Page scores ≥ 90 on Google Lighthouse (Performance, Accessibility, SEO)</li>
+</ul>
+
+</body>
+</html>
